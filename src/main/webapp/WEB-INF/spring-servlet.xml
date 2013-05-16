@@ -18,7 +18,7 @@
     http://www.springframework.org/schema/util
     http://www.springframework.org/schema/util/spring-util-2.0.xsd">
 
-    <context:component-scan base-package="davenkin.cimonitor.web"/>
+    <!--<context:component-scan base-package="davenkin.cimonitor.web"/>-->
     <mvc:annotation-driven/>
 
     <context:property-placeholder location="classpath:email.properties"/>
@@ -29,6 +29,16 @@
         <prop key="mail.store.protocol">imaps</prop>
         <prop key="mail.debug">false</prop>
     </util:properties>
+
+
+    <!--<util:properties id="javaMailProperties">-->
+    <!--<prop key="mail.pop3.socketFactory.fallback">false</prop>-->
+    <!--<prop key="mail.debug">true</prop>-->
+    <!--<prop key="mail.pop3.port">995</prop>-->
+    <!--<prop key="mail.pop3.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>-->
+    <!--<prop key="mail.pop3.socketFactory.port">995</prop>-->
+    <!--</util:properties>-->
+
 
     <mail:inbound-channel-adapter id="imapAdapter"
                                   store-uri="${email.uri}"
@@ -50,7 +60,14 @@
 
     <int:service-activator input-channel="recieveEmailChannel" ref="emailReceiver" method="receive"/>
 
-    <bean id="emailReceiver" class="davenkin.cimonitor.email.CiEmailReceiver">
+    <bean id="controller" class="davenkin.cimonitor.web.CiMonitorController">
+        <property name="projectRepository" ref="projectRepository"/>
     </bean>
+
+    <bean id="emailReceiver" class="davenkin.cimonitor.email.EmailReceiver">
+        <property name="projectRepository" ref="projectRepository"/>
+    </bean>
+
+    <bean id="projectRepository" class="davenkin.cimonitor.email.ProjectRepository"/>
 
 </beans>

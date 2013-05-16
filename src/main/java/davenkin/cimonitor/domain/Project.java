@@ -9,14 +9,27 @@ package davenkin.cimonitor.domain;
  */
 public class Project {
     private String name;
+
     private boolean success;
+
+    private boolean changedToFailed;
 
     public Project(String name) {
         this.name = name;
     }
 
+    public Project(Project ciProject) {
+        name = ciProject.getName();
+        success = ciProject.isSuccess();
+        changedToFailed = ciProject.isChangedToFailed();
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setChangedToFailed(boolean changedToFailed) {
+        this.changedToFailed = changedToFailed;
     }
 
     public boolean isSuccess() {
@@ -24,6 +37,7 @@ public class Project {
     }
 
     public void setSuccess(boolean success) {
+        changedToFailed = !success;
         this.success = success;
     }
 
@@ -34,13 +48,16 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (!name.equals(project.name)) return false;
+        return name.equals(project.name);
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    public boolean isChangedToFailed() {
+        return changedToFailed;
     }
 }

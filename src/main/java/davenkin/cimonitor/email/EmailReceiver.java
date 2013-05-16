@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,6 +18,8 @@ public class EmailReceiver {
     private ProjectRepository projectRepository;
 
     public void receive(MimeMessage mimeMessage) throws MessagingException {
+
+
         if (!isCiProject(mimeMessage)) {
             return;
         }
@@ -32,16 +35,16 @@ public class EmailReceiver {
         project.setSuccess(status);
     }
 
-    private boolean isCiProject(MimeMessage mimeMessage) {
-        return true;
+    private boolean isCiProject(MimeMessage mimeMessage) throws MessagingException {
+        return mimeMessage.getSubject().contains("Stage [");
     }
 
     private boolean resolveProjectStatus(MimeMessage mimeMessage) throws MessagingException {
-        return mimeMessage.getSubject().contains("session");  //To change body of created methods use File | Settings | File Templates.
+        return mimeMessage.getSubject().contains("passed");
     }
 
     private String resolveProjectName(MimeMessage mimeMessage) throws MessagingException {
-        return mimeMessage.getSubject();
+        return mimeMessage.getSubject().split("\\[|/")[1];
     }
 
     @Required

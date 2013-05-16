@@ -39,6 +39,16 @@
     <!--<prop key="mail.pop3.socketFactory.port">995</prop>-->
     <!--</util:properties>-->
 
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
 
     <mail:inbound-channel-adapter id="imapAdapter"
                                   store-uri="${email.uri}"
@@ -69,5 +79,8 @@
     </bean>
 
     <bean id="projectRepository" class="davenkin.cimonitor.email.ProjectRepository"/>
+
+    <mvc:resources mapping="/resources/**" location="/resources/"/>
+
 
 </beans>

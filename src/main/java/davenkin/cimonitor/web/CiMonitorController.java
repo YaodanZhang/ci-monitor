@@ -2,7 +2,6 @@ package davenkin.cimonitor.web;
 
 import davenkin.cimonitor.domain.Project;
 import davenkin.cimonitor.email.ProjectRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
 import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,10 +25,26 @@ import java.util.List;
 public class CiMonitorController {
     private ProjectRepository projectRepository;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "projects", method = RequestMethod.GET)
     @ResponseBody
-    public List<Project> processRequest() throws IOException {
-        return projectRepository.getAllCiProjects();
+    public List<Project> getProjects() throws IOException {
+        List<Project> allCiProjects = projectRepository.getAllCiProjects();
+
+        List<Project> returnProject = newArrayList();
+        for (Project ciProject : allCiProjects) {
+            returnProject.add(new Project(ciProject));
+        }
+
+        for (Project project1 : allCiProjects) {
+            project1.setChangedToFailed(false);
+        }
+
+        return returnProject;
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String home() {
+        return "index";
     }
 
     @Required

@@ -1,0 +1,34 @@
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'java'
+
+sourceCompatibility = 1.6
+group = 'davenkin'
+version = '1.0-SNAPSHOT'
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    testCompile 'junit:junit:4.8.2'
+    testCompile 'easymock:easymock:2.0'
+    compile 'org.springframework:spring-webmvc:3.1.0.RELEASE'
+    compile 'org.springframework:spring-web:3.1.0.RELEASE'
+    compile 'org.apache.geronimo.specs:geronimo-servlet_2.5_spec:1.2'
+    runtime 'org.codehaus.jackson:jackson-mapper-asl:1.7.1'
+    compile 'org.slf4j:slf4j-log4j12:1.7.2'
+    compile 'com.google.guava:guava:14.0'
+    compile 'org.springframework.integration:spring-integration-core:2.0.3.RELEASE'
+    compile 'org.springframework.integration:spring-integration-mail:2.0.3.RELEASE'
+    compile 'javax.mail:mail:1.4.7'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.0-milestone-9'
+    jarFile = 'wrapper/wrapper.jar'
+}
+

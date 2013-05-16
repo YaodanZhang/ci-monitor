@@ -1,0 +1,56 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:int="http://www.springframework.org/schema/integration"
+       xmlns:mail="http://www.springframework.org/schema/integration/mail"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/integration/mail
+            http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.0.xsd
+             http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-2.0.xsd">
+
+    <context:component-scan base-package="davenkin.cimonitor.web"/>
+    <mvc:annotation-driven/>
+
+    <context:property-placeholder location="classpath:email.properties"/>
+
+    <util:properties id="javaMailProperties">
+        <prop key="mail.imap.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+        <prop key="mail.imap.socketFactory.fallback">false</prop>
+        <prop key="mail.store.protocol">imaps</prop>
+        <prop key="mail.debug">false</prop>
+    </util:properties>
+
+    <mail:inbound-channel-adapter id="imapAdapter"
+                                  store-uri="${email.uri}"
+                                  channel="recieveEmailChannel"
+                                  should-delete-messages="false"
+                                  should-mark-messages-as-read="true"
+                                  auto-startup="true"
+                                  java-mail-properties="javaMailProperties">
+        <int:poller fixed-delay="2" time-unit="SECONDS"/>
+    </mail:inbound-channel-adapter>
+
+    <int:channel id="recieveEmailChannel">
+        <int:interceptors>
+            <int:wire-tap channel="logger"/>
+        </int:interceptors>
+    </int:channel>
+
+    <int:logging-channel-adapter id="logger" level="DEBUG"/>
+
+    <int:service-activator input-channel="recieveEmailChannel" ref="emailReceiver" method="receive"/>
+
+    <bean id="emailReceiver" class="davenkin.cimonitor.email.CiEmailReceiver">
+    </bean>
+
+</beans>

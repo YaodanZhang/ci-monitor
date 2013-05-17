@@ -3,6 +3,7 @@ package davenkin.cimonitor.email;
 import davenkin.cimonitor.domain.Project;
 import davenkin.cimonitor.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.Assert;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -23,6 +24,7 @@ public abstract class AbstractEmailHandler implements EmailHandler {
     @Override
     public void handle(MimeMessage mimeMessage) throws MessagingException {
         String name = resolveProjectName(mimeMessage);
+        Assert.notNull(name,"Project name must not be null!");
         Project project = getOrCreateProject(name);
         project.updateStatus(resolveProjectStatus(mimeMessage));
 

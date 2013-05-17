@@ -16,7 +16,7 @@ $.getJSON('/ci-monitor/projects', function(data) {
   $.each(data, function(i,data) {
 
   var isShow="";
-  if(getCookie(data.name)=="true")
+  if(getCookie(data.name)!="false")
   {
   isShow="checked"
   }

@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,8 +28,22 @@ public class CiMonitorController {
 
     @RequestMapping(value = "projects", method = RequestMethod.GET)
     @ResponseBody
-    public Set<Project> getProjects() throws IOException {
-        return projectRepository.getAllProjects();
+    public List<Project> getAllProjects() throws IOException {
+        return getAndSortProjects();
+    }
+
+    private ArrayList<Project> getAndSortProjects() {
+        ArrayList<Project> projects = new ArrayList<Project>();
+        projects.addAll(projectRepository.getAllProjects());
+        if (!projects.isEmpty()) {
+            Collections.sort(projects, new Comparator<Project>() {
+                @Override
+                public int compare(Project o1, Project o2) {
+                    return o1.getName().compareTo(o2.getName());
+                }
+            });
+        }
+        return projects;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

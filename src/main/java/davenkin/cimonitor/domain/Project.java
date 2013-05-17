@@ -16,11 +16,6 @@ public class Project {
         this.name = name;
     }
 
-    public Project(Project ciProject) {
-        name = ciProject.getName();
-        isSuccess = ciProject.isSuccess();
-    }
-
     public void updateStatus(boolean isSuccess) {
         this.isSuccess = isSuccess;
         notificationCount++;

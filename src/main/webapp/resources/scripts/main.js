@@ -1,5 +1,5 @@
-function playSound( url ){
-  document.getElementById("sound").innerHTML="<embed src='"+url+"' hidden=true autostart=true loop=false>";
+function playSound(){
+  $('#playsound').trigger("play");
 }
 
 $(document).ready(function(){
@@ -13,7 +13,7 @@ $.getJSON('/ci-monitor/projects', function(data) {
 
   $.each(data, function(i,data) {
 
-  if(getCookie(data.name)!="true")
+  if(getCookie(data.name)=="false")
   {
   return;
   }
@@ -30,7 +30,7 @@ if($('#'+ data.name).length==0)
                   if(data.notificationCount > parseInt($('#'+ data.name).text()))
                   {
                            $('#'+ data.name).text(data.notificationCount);
-                    playSound("resources/sound/alert.wav");
+                    playSound();
 
                   }
              }

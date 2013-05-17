@@ -12,17 +12,24 @@ $.getJSON('http://localhost:8080/ci-monitor/projects', function(data) {
  $('#root').html('');
 
   $.each(data, function(i,data) {
-         var status = "succeed";
-         if(data.success==false)
-         {
-         status="failed" ;
-         if(data.changedToFailed==true)
-         {
-         playSound("resources/sound/alert.wav");
-         }
-         }
 
-      $('#root').append('<div class="survey '+status+'">' + data.name + '<div/>');
+if($('#'+ data.name).length==0)
+{
+          $('#count').append('<div id='+data.name+'>' + data.notificationCount + '</div>');
+}
+
+            var status = "succeed";
+             if(data.success==false)
+             {
+                status="failed" ;
+                  if(data.notificationCount > parseInt($('#'+ data.name).text()))
+                  {
+                           $('#'+ data.name).text(data.notificationCount);
+                    playSound("resources/sound/alert.wav");
+
+                  }
+             }
+      $('#root').append('<div class="survey '+status+'">' + data.name + '</div>');
 
   });
 

@@ -1,12 +1,12 @@
-package davenkin.cimonitor.email;
+package davenkin.cimonitor.repository;
 
 import com.google.common.base.Predicate;
 import davenkin.cimonitor.domain.Project;
 
-import java.util.List;
+import java.util.Set;
 
 import static com.google.common.collect.FluentIterable.from;
-import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,10 +15,11 @@ import static com.google.common.collect.Lists.newArrayList;
  * Time: 7:20 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ProjectRepository {
-    private List<Project> projects = newArrayList();
+public class DefaultProjectRepository implements ProjectRepository {
+    private Set<Project> projects = newHashSet();
 
-    public Project findCiProjectByName(final String name) {
+    @Override
+    public Project findProjectByName(final String name) {
         return from(projects).firstMatch(new Predicate<Project>() {
             @Override
             public boolean apply(Project project) {
@@ -27,11 +28,13 @@ public class ProjectRepository {
         }).orNull();
     }
 
-    public List<Project> getAllCiProjects() {
+    @Override
+    public Set<Project> getAllProjects() {
         return projects;
     }
 
-    public void addCiProject(Project project) {
+    @Override
+    public void addProject(Project project) {
         projects.add(project);
     }
 

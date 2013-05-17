@@ -9,6 +9,7 @@
 <body>
 <div id="root"></div>
 <div id="sound"></div>
+<div id="count" hidden="true"></div>
 </body>
 
 </html>

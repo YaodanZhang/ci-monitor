@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
  * Time: 10:50 PM
  * To change this template use File | Settings | File Templates.
  */
-public class EmailReceiverTest {
+public class EmailReceiveServiceTest {
    @Test
     public void dd(){
        String subject = "Stage [GCIS-Trunk/1118/Build/1] passed";

@@ -31,16 +31,8 @@
     </util:properties>
 
 
-    <!--<util:properties id="javaMailProperties">-->
-    <!--<prop key="mail.pop3.socketFactory.fallback">false</prop>-->
-    <!--<prop key="mail.debug">true</prop>-->
-    <!--<prop key="mail.pop3.port">995</prop>-->
-    <!--<prop key="mail.pop3.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>-->
-    <!--<prop key="mail.pop3.socketFactory.port">995</prop>-->
-    <!--</util:properties>-->
-
     <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/WEB-INF/jsp/</value>
         </property>
@@ -74,11 +66,24 @@
         <property name="projectRepository" ref="projectRepository"/>
     </bean>
 
-    <bean id="emailReceiver" class="davenkin.cimonitor.email.EmailReceiver">
+    <bean id="emailReceiver" class="davenkin.cimonitor.email.EmailReceiveService">
+        <property name="emailHandlers" ref="emailHandlers"/>
+    </bean>
+
+    <bean id="emailHandlers" class="java.util.ArrayList">
+        <constructor-arg>
+            <list>
+                <ref bean="goEmailHandler"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="goEmailHandler" class="davenkin.cimonitor.email.GoEmailHandler">
         <property name="projectRepository" ref="projectRepository"/>
     </bean>
 
-    <bean id="projectRepository" class="davenkin.cimonitor.email.ProjectRepository"/>
+
+    <bean id="projectRepository" class="davenkin.cimonitor.repository.DefaultProjectRepository"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 

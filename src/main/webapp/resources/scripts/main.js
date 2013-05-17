@@ -4,7 +4,7 @@ function playSound( url ){
 
 $(document).ready(function(){
 myTimer();
-setInterval(function(){myTimer()},5000);
+setInterval(function(){myTimer()},3000);
 
 function myTimer()
 {
@@ -12,6 +12,11 @@ $.getJSON('http://localhost:8080/ci-monitor/projects', function(data) {
  $('#root').html('');
 
   $.each(data, function(i,data) {
+
+  if(getCookie(data.name)!="true")
+  {
+  return;
+  }
 
 if($('#'+ data.name).length==0)
 {

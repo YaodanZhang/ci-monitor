@@ -34,6 +34,11 @@ public class CiMonitorController {
         return "index";
     }
 
+    @RequestMapping(value = "config", method = RequestMethod.GET)
+    public String config() {
+        return "config";
+    }
+
     @Required
     public void setProjectRepository(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;

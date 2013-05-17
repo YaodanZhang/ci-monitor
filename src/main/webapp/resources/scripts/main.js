@@ -8,7 +8,7 @@ setInterval(function(){myTimer()},3000);
 
 function myTimer()
 {
-$.getJSON('http://localhost:8080/ci-monitor/projects', function(data) {
+$.getJSON('/ci-monitor/projects', function(data) {
  $('#root').html('');
 
   $.each(data, function(i,data) {

@@ -39,7 +39,7 @@ public class CiMonitorController {
             Collections.sort(projects, new Comparator<Project>() {
                 @Override
                 public int compare(Project o1, Project o2) {
-                    return o1.getName().compareTo(o2.getName());
+                    return o1.getName().toLowerCase().compareTo(o2.getName().toLowerCase());
                 }
             });
         }

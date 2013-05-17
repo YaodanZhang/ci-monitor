@@ -8,7 +8,7 @@
 </head>
 
 <body>
-<div><a href="config">Configuration</a>
+<div><a href="config">Choose projects to display</a>
 </div>
 <div id="root"></div>
 <div id="sound"></div>

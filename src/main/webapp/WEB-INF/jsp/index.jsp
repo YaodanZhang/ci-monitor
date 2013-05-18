@@ -11,7 +11,7 @@
 </div>
 <div id="root"></div>
 <div id="sound">
-<audio id="playsound" src="resources/sound/alert.wav"></audio>
+<audio id="playsound" src="resources/sound/alert1.wav"></audio>
 </div>
 <div id="count" hidden="true"></div>
 

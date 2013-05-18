@@ -4,7 +4,7 @@ function playSound(){
 
 $(document).ready(function(){
 myTimer();
-setInterval(function(){myTimer()},5000);
+setInterval(function(){myTimer()},3000);
 
 function myTimer()
 {

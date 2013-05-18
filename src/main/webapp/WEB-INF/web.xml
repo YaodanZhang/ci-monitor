@@ -3,7 +3,7 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-    <display-name>ci-monitor</display-name>
+    <display-name>davenkin-ci-monitor</display-name>
 
     <servlet>
         <servlet-name>spring</servlet-name>

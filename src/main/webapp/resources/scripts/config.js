@@ -6,11 +6,11 @@ $(document).ready(function(){
         setCookie($(this).attr('name'), $(this).attr('checked'),3000);
         });
 
-        window.location = '/ci-monitor';
+        window.location = '/davenkin-ci-monitor';
     });
 
 
-$.getJSON('/ci-monitor/projects', function(data) {
+$.getJSON('/davenkin-ci-monitor/projects', function(data) {
  $('#root').html('');
 
   $.each(data, function(i,data) {

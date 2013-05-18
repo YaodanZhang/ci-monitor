@@ -8,7 +8,7 @@ setInterval(function(){myTimer()},5000);
 
 function myTimer()
 {
-$.getJSON('/ci-monitor/projects', function(data) {
+$.getJSON('/davenkin-ci-monitor/projects', function(data) {
  $('#root').html('');
 
   $.each(data, function(i,data) {

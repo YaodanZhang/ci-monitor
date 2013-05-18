@@ -18,7 +18,7 @@ public class GoEmailHandler extends AbstractEmailHandler {
     }
 
     protected String resolveProjectName(MimeMessage mimeMessage) throws MessagingException {
-        return mimeMessage.getSubject().split("\\[|/")[1];
+        return mimeMessage.getSubject().split("\\[|/")[1].trim();
     }
 
     protected boolean resolveProjectStatus(MimeMessage mimeMessage) throws MessagingException {

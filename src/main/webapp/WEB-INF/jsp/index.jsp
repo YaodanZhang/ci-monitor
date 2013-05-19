@@ -14,7 +14,7 @@
 <div id="sound">
 <audio id="alert" src="resources/sound/alert.wav"></audio>
 <audio id="ifeelgood" src="resources/sound/ifeelgood.wav"></audio>
-<audio id="triggers" src="resources/sound/triggers.wav"></audio>
+<audio id="tiggers" src="resources/sound/tiggers.wav"></audio>
 <audio id="hellobaby" src="resources/sound/hellobaby.wav"></audio>
 <audio id="drink" src="resources/sound/drink.wav"></audio>
 <audio id="nanana" src="resources/sound/nanana.wav"></audio>

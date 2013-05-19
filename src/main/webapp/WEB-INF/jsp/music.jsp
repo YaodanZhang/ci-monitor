@@ -20,8 +20,8 @@ float:right;
 <input type="radio" name="failuemusic" value="ifeelgood">I feel good
 <audio class="sample" controls src="resources/sound/ifeelgood.wav"></audio>
 <p/>
-<input type="radio" name="failuemusic" value="triggers">Triggers
-<audio class="sample" controls  src="resources/sound/triggers.wav"></audio>
+<input type="radio" name="failuemusic" value="tiggers">Tiggers
+<audio class="sample" controls  src="resources/sound/tiggers.wav"></audio>
 <p/>
 <input type="radio" name="failuemusic" value="drink">Do you want a drink
 <audio class="sample" controls  src="resources/sound/drink.wav"></audio>
@@ -46,7 +46,6 @@ float:right;
 <p/>
 <input type="radio" name="failuemusic" value="march">March
 <audio class="sample"  controls src="resources/sound/march.wav"></audio>
-
 </div>
 <p/>
 <button id="savemusic" type="button">Save</button>

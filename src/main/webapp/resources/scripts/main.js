@@ -1,5 +1,5 @@
-function playSound(){
-  $('#playsound').trigger("play");
+function playSound(sound){
+  $('#'+sound).trigger("play");
 }
 
 $(document).ready(function(){
@@ -30,7 +30,7 @@ if($('#'+ data.name).length==0)
                   if(data.notificationCount > parseInt($('#'+ data.name).text()))
                   {
                            $('#'+ data.name).text(data.notificationCount);
-                    playSound();
+                    playSound("triggers");
 
                   }
              }

@@ -12,7 +12,9 @@
 </div>
 <div id="root"></div>
 <div id="sound">
-<audio id="playsound" src="resources/sound/alert1.wav"></audio>
+<audio id="alert" src="resources/sound/alert.wav"></audio>
+<audio id="ifeelgood" src="resources/sound/ifeelgood.wav"></audio>
+<audio id="triggers" src="resources/sound/triggers.wav"></audio>
 </div>
 <div id="count" hidden="true"></div>
 

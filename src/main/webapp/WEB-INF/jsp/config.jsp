@@ -13,6 +13,7 @@
 
 <p/>
 <button id="button" type="button">Save</button>
+<button id="clear" type="button">Clear All</button>
 </div>
 </body>
 

@@ -9,6 +9,12 @@ $(document).ready(function(){
         window.location = '/davenkin-ci-monitor';
     });
 
+     $("#clear").click(function () {
+        $("#root :input").each(function(){
+$(this).removeAttr('checked');
+        });
+    });
+
 
 $.getJSON('/davenkin-ci-monitor/projects', function(data) {
  $('#root').html('');

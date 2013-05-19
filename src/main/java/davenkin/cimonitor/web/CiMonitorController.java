@@ -56,6 +56,11 @@ public class CiMonitorController {
         return "config";
     }
 
+   @RequestMapping(value = "music", method = RequestMethod.GET)
+    public String music() {
+        return "music";
+    }
+
     @Required
     public void setProjectRepository(ProjectRepository projectRepository) {
         this.projectRepository = projectRepository;

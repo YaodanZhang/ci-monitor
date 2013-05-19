@@ -1,5 +1,10 @@
-function playSound(sound){
-  $('#'+sound).trigger("play");
+function playSound(){
+var music = getCookie('music');
+if(music==null)
+{
+music='ifeelgood';
+}
+  $('#'+music).trigger("play");
 }
 
 $(document).ready(function(){
@@ -30,7 +35,7 @@ if($('#'+ data.name).length==0)
                   if(data.notificationCount > parseInt($('#'+ data.name).text()))
                   {
                            $('#'+ data.name).text(data.notificationCount);
-                    playSound("triggers");
+                    playSound();
 
                   }
              }

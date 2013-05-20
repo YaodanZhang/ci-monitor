@@ -4,7 +4,10 @@ if(music==null)
 {
 music='ifeelgood';
 }
+if($('#musicoff').attr('checked')==false)
+{
   $('#'+music).trigger("play");
+  }
 }
 
 $(document).ready(function(){

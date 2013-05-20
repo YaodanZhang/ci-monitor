@@ -8,7 +8,8 @@
 </head>
 
 <body>
-<div><a href="config">Choose projects to display</a><a style="padding-left:20px;" href="music">Choose failure music</a>
+<div><a href="config">Choose projects to display</a><a style="padding-left:20px;padding-right:20px;" href="music">Choose failure music</a>
+<input type="checkbox" name="musictoggle" value="playmusic" id="musicoff">Do not play music
 </div>
 <div id="root"></div>
 <div id="sound">

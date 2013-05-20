@@ -23,7 +23,7 @@ public class GoEmailHandler extends AbstractEmailHandler {
 
     protected boolean resolveProjectStatus(MimeMessage mimeMessage) throws MessagingException {
         String subject = mimeMessage.getSubject();
-        return subject.contains("passed") || subject.contains("fixed");
+        return subject.contains("passed") || subject.contains("fixed") || subject.contains("cancelled");
     }
 
 }

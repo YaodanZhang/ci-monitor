@@ -74,11 +74,16 @@
         <constructor-arg>
             <list>
                 <ref bean="goEmailHandler"/>
+                <ref bean="jenkinsEmailHandler"/>
             </list>
         </constructor-arg>
     </bean>
 
     <bean id="goEmailHandler" class="davenkin.cimonitor.email.GoEmailHandler">
+        <property name="projectRepository" ref="projectRepository"/>
+    </bean>
+
+    <bean id="jenkinsEmailHandler" class="davenkin.cimonitor.email.JenkinsEmailHandler">
         <property name="projectRepository" ref="projectRepository"/>
     </bean>
 

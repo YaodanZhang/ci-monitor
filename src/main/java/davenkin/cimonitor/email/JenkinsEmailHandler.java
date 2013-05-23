@@ -18,8 +18,7 @@ public class JenkinsEmailHandler extends AbstractEmailHandler {
     }
 
     protected String resolveProjectName(MimeMessage mimeMessage) throws MessagingException {
-        String[] strings = mimeMessage.getSubject().split(":|#");
-        return strings[strings.length - 2].trim();
+        return mimeMessage.getSubject().split(":|#|»|>>")[1].trim();
     }
 
     protected boolean resolveProjectStatus(MimeMessage mimeMessage) throws MessagingException {

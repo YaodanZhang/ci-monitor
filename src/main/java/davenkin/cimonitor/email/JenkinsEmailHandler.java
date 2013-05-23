@@ -23,7 +23,7 @@ public class JenkinsEmailHandler extends AbstractEmailHandler {
     }
 
     protected String resolveProjectName(MimeMessage mimeMessage) throws MessagingException {
-        return from(Arrays.asList(mimeMessage.getSubject().split(":|#|\u00bb|"))).filter(new Predicate<String>() {
+        return from(Arrays.asList(mimeMessage.getSubject().split(":|#|\u00bb"))).filter(new Predicate<String>() {
             @Override
             public boolean apply(String input) {
                 return !input.equalsIgnoreCase("Fwd");

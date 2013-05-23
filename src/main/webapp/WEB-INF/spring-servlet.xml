@@ -88,7 +88,7 @@
     </bean>
 
 
-    <bean id="projectRepository" class="davenkin.cimonitor.repository.DefaultProjectRepository"/>
+    <bean id="projectRepository" class="davenkin.cimonitor.repository.DefaultProjectRepository" init-method="init" destroy-method="cleanUp"/>
 
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 

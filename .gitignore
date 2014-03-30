@@ -1,6 +1,6 @@
 # Object files
 *.o
-
+aa.txt
 target
 *.iml
 *.ipr

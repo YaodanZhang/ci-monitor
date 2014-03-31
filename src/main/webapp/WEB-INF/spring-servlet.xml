@@ -7,76 +7,31 @@
        xmlns:task="http://www.springframework.org/schema/task"
        xmlns="http://www.springframework.org/schema/beans"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-       http://www.springframework.org/schema/context
-	   http://www.springframework.org/schema/context/spring-context-3.0.xsd
-	   http://www.springframework.org/schema/mvc
-       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-       http://www.springframework.org/schema/integration/mail
-       http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.0.xsd
-       http://www.springframework.org/schema/integration
-       http://www.springframework.org/schema/integration/spring-integration.xsd
-       http://www.springframework.org/schema/util
-       http://www.springframework.org/schema/util/spring-util-2.0.xsd
-       http://www.springframework.org/schema/task
-       http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+ http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+        http://www.springframework.org/schema/integration/mail
+            http://www.springframework.org/schema/integration/mail/spring-integration-mail-2.0.xsd
+             http://www.springframework.org/schema/integration
+    http://www.springframework.org/schema/integration/spring-integration.xsd
+    http://www.springframework.org/schema/util
+    http://www.springframework.org/schema/util/spring-util-2.0.xsd
+    http://www.springframework.org/schema/task
+http://www.springframework.org/schema/task/spring-task-3.0.xsd">
 
     <context:property-placeholder location="classpath:email.properties"/>
 
-    <task:scheduler id="dddScheduler" pool-size="3"/>
+    <task:scheduler id="dddScheduler" pool-size="10"/>
 
     <task:scheduled-tasks scheduler="dddScheduler">
         <task:scheduled ref="dddReporter"
-                        method="report" cron="0 0 12 * * ?"/>
+                        method="report" cron="*/5 * * * * ?"/>
     </task:scheduled-tasks>
 
-    <bean id="dddReporter" class="davenkin.cimonitor.domain.IDDDReporter">
-        <constructor-arg ref="reportingContexts"/>
-    </bean>
-
-    <bean id="amazon-iddd" class="davenkin.cimonitor.domain.AmazonRankFileGenerator">
-        <constructor-arg index="0"
-                         value="http://www.amazon.cn/%E5%AE%9E%E7%8E%B0%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1-%E5%BC%97%E5%86%9C/dp/B00IYTVWA6"/>
-        <constructor-arg index="1" value="amazon-iddd.csv"/>
-        <constructor-arg index="2" value="//span[@class='zg_hrsr_rank']"/>
-    </bean>
-
-
-    <bean id="amazon-software-theory" class="davenkin.cimonitor.domain.AmazonRankFileGenerator">
-        <constructor-arg index="0"
-                         value="http://www.amazon.cn/gp/bestsellers/books/660993051/ref=pd_zg_hrsr_b_1_4_last"/>
-        <constructor-arg index="1" value="amazon-rank-in-software-theory.csv"/>
-        <constructor-arg index="2"
-                         value="//div[@class='zg_title']/a[contains(@href,'B00IYTVWA6')]/../../div[@class='zg_rankLine']"/>
-    </bean>
-
-
-    <bean id="amazon-software-engineering" class="davenkin.cimonitor.domain.AmazonRankFileGenerator">
-        <constructor-arg index="0"
-                         value="http://www.amazon.cn/gp/bestsellers/books/658812051/ref=zg_bs_nav_b_2_658414051"/>
-        <constructor-arg index="1" value="amazon-rank-in-software-engineer.csv"/>
-        <constructor-arg index="2"
-                         value="//div[@class='zg_title']/a[contains(@href,'B00IYTVWA6')]/../../div[@class='zg_rankLine']"/>
-    </bean>
-
-
-    <bean id="china-pub-computer" class="davenkin.cimonitor.domain.ChinaPubRankFileGenerator">
-        <constructor-arg index="0"
-                         value="http://product.china-pub.com/cache/rank3/sale/day/rank_day_7_59_1.html"/>
-        <constructor-arg index="1" value="china-pub-computer.csv"/>
-        <constructor-arg index="2"
-                         value="//div[@class='xians-list']/ul/li/table/tbody/tr[1]/td/a"/>
-    </bean>
-
-    <bean id="reportingContexts" class="java.util.ArrayList">
-        <constructor-arg>
-            <list>
-                <ref bean="amazon-iddd"/>
-                <ref bean="amazon-software-theory"/>
-                <ref bean="amazon-software-engineering"/>
-                <ref bean="china-pub-computer"/>
-            </list>
-        </constructor-arg>
+    <bean id="dddReporter" class="davenkin.cimonitor.domain.DDDReporter">
+        <property name="command" value="${command}"/>
     </bean>
 
 

@@ -34,8 +34,6 @@ public abstract class AbstractRankFileGenerator implements RankFileGenerator {
             return findRank(rankNumberXpath);
         } catch (Exception e) {
             return "";
-        }  finally {
-            driver.close();
         }
     }
 
